@@ -1,6 +1,7 @@
 import std/logging
 import prologue
 import prologue/middlewares/utils
+import prologue/middlewares/cors
 
 import db
 import db/setup
@@ -35,9 +36,14 @@ proc main =
       initEvent(settings.setLoggingLevel("error.log", "rolling.log"))
     ]
   )
+  
 
   app.use(@[
     debugRequestMiddleware(),
+    CorsMiddleware(
+      allowOrigins =  @["*"],
+      allowMethods = @["GET", "POST", "PUT"]
+      ),
   ])
 
   for r in routesDefinition:

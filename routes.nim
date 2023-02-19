@@ -1,6 +1,6 @@
 import prologue
 import routes/home
-import routes/api/song
+import routes/api/upload
 
 type
   Route = tuple
@@ -12,7 +12,7 @@ const
     ("", @[
       pattern("/", index, HttpGet, "home"),
     ]),
-    ("api/song", @[
-      pattern("/create", createSong, HttpPost, "api_createSong"),
+    ("api/file", @[
+      pattern("/upload", createUpload, HttpPost, "api_createUpload"),
     ]),
   ]
