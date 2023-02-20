@@ -1,5 +1,5 @@
 <template>
-    <input v-on:change="handleFileUpload($event)" type="file" />
+    <input v-on:change="handleFileUpload($event)" type="file" name="file" />
     <button @click="upload">Upload</button>
 </template>
 
@@ -15,19 +15,17 @@ export default{
             this.file = event.target.files[0];
         },
         upload() {
-            console.log(this.file)
+            let formData = new FormData();
+            formData.append( 'method', 'POST');
+            formData.append('file', this.file);
+            console.log(formData)
             return fetch('http://localhost:8080/api/file/upload/', {
                 method: 'POST',
-                headers: {"content-type": "application/json"},
-                body:  JSON.stringify({
-                    'name': this.file.name,
-                    'path': './test/here/',
-                    'file': this.file
-                })
+                body:  formData
             })
             .then((res) => console.log(res.json))
             // .then((json) => (data.value = json))
-            .catch((err) => (error.value = err))
+            .catch((err) => (console.log(err)))
         }
     }
 }

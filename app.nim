@@ -42,7 +42,8 @@ proc main =
     debugRequestMiddleware(),
     CorsMiddleware(
       allowOrigins =  @["*"],
-      allowMethods = @["GET", "POST", "PUT"]
+      allowMethods = @["*"],
+      allowHeaders = @["*"],
       ),
   ])
 
