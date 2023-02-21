@@ -1,6 +1,6 @@
 import prologue
 import routes/home
-import routes/api/upload
+import routes/api/[upload, notechall]
 
 type
   Route = tuple
@@ -15,5 +15,9 @@ const
     ("api/file", @[
       pattern("/upload", createUpload, HttpPost, "api_createUpload"),
       pattern("/uploads", listUploads, HttpGet, "api_listUploads")
+    ]),
+    ("api/notechall", @[
+      pattern("/create", createNoteChall, HttpPost, "api_createNoteChall"),
+      pattern("/list", listNoteChalls, HttpGet, "api_listNoteChalls")
     ]),
   ]
