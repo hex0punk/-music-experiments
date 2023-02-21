@@ -1,6 +1,7 @@
 nimcache/
 nimblecache/
 htmldocs/
+app
 
 .DS_Store
 node_modules/
