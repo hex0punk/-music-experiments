@@ -19,7 +19,6 @@ $ nimble install prologue
 ...
 $ nimble install norm
 ...
-$ 
 ```
 
 - For `prologue`, select `y` when asked if package.json should be downloaded
