@@ -14,5 +14,6 @@ const
     ]),
     ("api/file", @[
       pattern("/upload", createUpload, HttpPost, "api_createUpload"),
+      pattern("/uploads", listUploads, HttpGet, "api_listUploads")
     ]),
   ]
