@@ -61,11 +61,9 @@ proc optimizeKey(self: Scale) =
     else: return
 
 proc getMajorForKey*(self: Scale): seq[string] =
-    echo "getting notes for " & self.key
     self.optimizeKey()
     var keyidx: int = self.indexForKey()
     var orderedNotes = self.reorderNotes(keyidx)
-    echo "ordered: " & intToStr(len(orderedNotes))
     echo orderedNotes
     var res = newSeq[string]()
     res.add(self.key)
@@ -78,10 +76,8 @@ proc getMajorForKey*(self: Scale): seq[string] =
     return res
 
 proc getMajorChordsForKey*(self: Scale): seq[string] =
-    echo "test"
-    var notes = self.getMajorChordsForKey()
+    var notes = self.getMajorForKey()
     var res = newSeq[string]()
-    echo "iterrrr"
     for idx, note in notes:
         echo note & $BaseChords[idx]
         res.add(note & $BaseChords[idx])

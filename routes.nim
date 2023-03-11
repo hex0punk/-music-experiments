@@ -18,7 +18,7 @@ const
     ]),
     ("api/scales", @[
       pattern("/scale", scale, HttpGet, "api_scale"),
-      pattern("/chords", chords, HttpGet, "api_chords")
+      pattern("/chords", getChords, HttpGet, "api_chords")
     ]),
     ("api/notechall", @[
       pattern("/create", createNoteChall, HttpPost, "api_createNoteChall"),

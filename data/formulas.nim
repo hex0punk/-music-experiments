@@ -11,4 +11,4 @@ const
 
 const
     BaseIntervals* = [Tone, Tone, SemiTone, Tone, Tone, Tone, SemiTone]
-    BaseChords* = [Major, Minor, Minor, Major, Major, Minor, Dim]
+    BaseChords* = [Major, Minor, Minor, Major, Major, Minor, Dim, Major]

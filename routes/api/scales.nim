@@ -11,11 +11,12 @@ proc scale*(ctx: Context) {.async.} =
     var result = %*scale
     resp jsonResponse(result)
 
-proc chords*(ctx: Context) {.async.} =
+proc getChords*(ctx: Context) {.async.} =
     let key = ctx.getQueryParamsOption("key").get()
     var sc = Scale(name: "", key: key)
     echo "calling func"
     let chords = sc.getMajorChordsForKey()
+    echo "result"
     var result = %*chords
     resp jsonResponse(result)
 
