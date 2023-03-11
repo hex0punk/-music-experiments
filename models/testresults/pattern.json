@@ -1,0 +1,2 @@
+[
+{"name":"tests/test0.nim c","category":"pattern","target":"c","action":"reject","result":"reMsgsDiffer","expected":"undeclared identifier: 'not_defined'","given":"","machine":"hex0punks-MacBook-Air.local","commit":"470bddc6189","branch":"main"}]

@@ -17,7 +17,9 @@ proc createNoteChall*(ctx: Context) {.async} =
     let upload = getUploadByName(noteChall.upload.name)
     if isNil(upload):
         resp "<p>Does not exist</p>"
-    insertNoteChall(noteChall)
+    var nc2 = newNoteChall(upload, noteChall.notes)
+    nc2.upload = upload
+    insertNoteChall(nc2)
     resp "done"
 
 proc listNoteChalls*(ctx: Context) {.async} = 
