@@ -47,8 +47,16 @@ proc semiTone(self: Scale, note: string): string =
     else:
         return note
 
-proc reorderNotes(self: Scale, fromIdx: int): seq[string] =
+proc reorderNotes*(self: Scale, fromIdx: int): seq[string] =
     return Notes[fromIdx .. len(Notes)-1] & Notes[0 .. fromIdx]
+
+proc reorderIntervalsForMode*(self: Scale, mode: Mode): seq[Intervals] = 
+    var modeIdx = ord(mode)
+    return BaseIntervals[modeIdx .. len(BaseIntervals)-1] & BaseIntervals[0 .. modeIdx - 1]
+
+proc reorderChordsForMode*(self: Scale, mode: Mode): seq[Chords] = 
+    var modeIdx = ord(mode)
+    return BaseChords[modeIdx .. len(BaseChords)-1] & BaseChords[0 .. modeIdx - 1]
 
 proc optimizeKey(self: Scale) = 
     case self.key:
@@ -62,9 +70,6 @@ proc optimizeKey(self: Scale) =
 
 proc getMajorForKey*(self: Scale): seq[string] =
     self.optimizeKey()
-    var keyidx: int = self.indexForKey()
-    var orderedNotes = self.reorderNotes(keyidx)
-    echo orderedNotes
     var res = newSeq[string]()
     res.add(self.key)
     for idx, inter in BaseIntervals:
@@ -83,4 +88,25 @@ proc getMajorChordsForKey*(self: Scale): seq[string] =
         res.add(note & $BaseChords[idx])
     return res
 
+proc getScaleForMode*(self: Scale, mode: Mode): seq[string] =
+    self.optimizeKey()
+    var orderedIntervals = self.reorderIntervalsForMode(mode)
+    var res = newSeq[string]()
+    res.add(self.key)
+    for idx, inter in orderedIntervals:
+        var prev = res[idx]
+        if inter == Intervals.Tone:
+            res.add(self.addTone(prev))
+        else:
+            res.add(self.semiTone(prev))
+    return res
 
+proc getChordsForMode*(self: Scale, mode: Mode): seq[string] =
+    var notes = self.getScaleForMode(mode)
+    var reorderedChords = self.reorderChordsForMode(mode)
+    echo reorderedChords
+    var res = newSeq[string]()
+    for idx, note in notes:
+        echo note & $reorderedChords[idx]
+        res.add(note & $reorderedChords[idx])
+    return res
