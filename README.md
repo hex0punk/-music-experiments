@@ -30,8 +30,3 @@ $ nim c -r app.nim
 ```
 
 Alternatively, add `~/.nimble/bin` to your path and run `logue run`.
-
-
-
-
-
