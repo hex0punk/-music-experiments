@@ -1,5 +1,5 @@
 import std/logging
-import ../data/formulas
+import ../utils/[formulas, noteUtils]
 
 addHandler newConsoleLogger(fmtStr = "")
 
@@ -12,14 +12,8 @@ type
 proc newScale*(key: string, mode: Mode = Ionian, optimized: bool = false): Scale =
   Scale(key: key, mode: mode, optimized: optimized)
 
-proc indexForNote(self: Scale, note: string): int =
-    for idx, n in Notes:
-        if n == note:
-            return idx
-    return -1
-
 proc addTone(self: Scale, note: string): string =
-    var idx = self.indexForNote($note[0])
+    var idx = indexForNote($note[0])
     case note:
     of "A", "C", "D", "F", "G", "Bb", "Eb":
         return Notes[idx + 1]
@@ -31,7 +25,7 @@ proc addTone(self: Scale, note: string): string =
         return note
 
 proc semiTone(self: Scale, note: string): string = 
-    var idx = self.indexForNote($note[0])
+    var idx = indexForNote($note[0])
     case note:
     of "C#", "D#", "F#", "G#", "A#", "B", "E", "Cb", "Db", "Fb", "Gb", "Ab":
         return Notes[idx + 1] 
@@ -85,5 +79,3 @@ proc getChordsForMode*(self: Scale): seq[string] =
     for idx, note in notes:
         res.add(note & $reorderedChords[idx])
     return res
-
-## TODO: Some general methods to move elsewhere at one point

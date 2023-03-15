@@ -1,7 +1,7 @@
 import prologue
 import strutils
 import ../../models/scale
-import ../../data/formulas
+import ../../utils/formulas
 
 proc scale*(ctx: Context) {.async.} =
     let key = ctx.getQueryParamsOption("key").get()
