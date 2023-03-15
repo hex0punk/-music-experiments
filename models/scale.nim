@@ -31,7 +31,6 @@ proc addTone(self: Scale, note: string): string =
         return note
 
 proc semiTone(self: Scale, note: string): string = 
-    self.optimized = true
     var idx = self.indexForNote($note[0])
     case note:
     of "C#", "D#", "F#", "G#", "A#", "B", "E", "Cb", "Db", "Fb", "Gb", "Ab":
